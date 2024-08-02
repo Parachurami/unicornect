@@ -3,13 +3,13 @@ import icon from '../../assets/images/icon.png';
 import arrow from '../../assets/images/arrow.png';
 import ig_icon from '../../assets/images/ig_icon.png';
 import {NavLink} from "react-router-dom";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import React from "react";
 import Modal from 'react-modal';
 import clock2 from '../../assets/images/clock-2.png';
 import cancel2 from '../../assets/images/cancel-2.png'
 import axios from "axios";
-import Loading from "../Error/components/Loading";
+
 const Home = () => {
     const [currentPage, setCurrentPage] = useState(0);
     const currentPageHandler = (value) => setCurrentPage(value);
@@ -27,38 +27,42 @@ const Home = () => {
     const handleSaveData =  async (e) => {
         e.preventDefault();
         console.log('Submitted')
-        // try {
-        //     const response = await axios.post('http://localhost:3001/save-data', { data: {
-        //         firstName: firstName,
-        //         lastName: lastName,
-        //         email: inputData
-        //         } });
-        //     console.log(response.data);
-        //     setInputData('');
-        //     closeModal()
-        //     openSuccessModal()
-        //     // Handle success or display a message
-        // } catch (error) {
-        //     console.error('Error saving data:', error);
-        //     setInputData('')
-        //     setModalVisible(false)
-        //     // Handle error or display an error message
-        // }
-        try{
-            const response = await axios.post('http://127.0.0.1:5000/send-email', {
-                recipient: inputData,
-                subject: "Hello there",
-                body: "Hi"
-            });
-            console.log(response.status);
 
-        }catch (e) {
-            console.log('Error saving data: ', e);
+        // sending data to the backend
+        try {
+            const response = await axios.post('http://localhost:3001/save-data', { data: {
+                firstName: firstName,
+                lastName: lastName,
+                email: inputData
+                } });
+            console.log(response.data);
             setInputData('');
-            setFirstName('');
-            setLastName('');
+            closeModal()
+            openSuccessModal()
+            // Handle success or display a message
+        } catch (error) {
+            console.error('Error saving data:', error);
+            setInputData('')
             setModalVisible(false)
+            // Handle error or display an error message
         }
+
+
+        // try{
+        //     const response = await axios.post('http://127.0.0.1:5000/send-email', {
+        //         recipient: inputData,
+        //         subject: "Hello there",
+        //         body: "Hi"
+        //     });
+        //     console.log(response.status);
+        //
+        // }catch (e) {
+        //     console.log('Error saving data: ', e);
+        //     setInputData('');
+        //     setFirstName('');
+        //     setLastName('');
+        //     setModalVisible(false)
+        // }
     };
 
     return (
@@ -101,13 +105,14 @@ const Home = () => {
                         </div>
                     </button>
                     <p className={'invitation-text'}>Join Michael Ndubuisi, Saviour Etop and 235 others</p>
+
+                    {/* User Input Form */}
                     <Modal
                         className={'modal'}
                         isOpen={modalVisible}
                         onRequestClose={closeModal}
                     >
                         <form onSubmit={handleSaveData} className={'modal-body'}>
-                            {/*<p className={'modal-title'}>Enter Your Email Address to Join</p>*/}
                             <div className={"name-details"}>
                                 <input required type="text" value={firstName} onChange={(e => {
                                     setFirstName(e.target.value)
@@ -129,6 +134,7 @@ const Home = () => {
                         </form>
                     </Modal>
 
+                    {/* Success Modal When User Joins Waitlist */}
                     <Modal className={'success-modal'} isOpen={successModalVisible} onRequestClose={closeSuccessModal}>
                         <img onClick={closeSuccessModal} className={'cancel-success'} alt={'cancle'} src={cancel2}/>
                         <div className={'success-body'}>
