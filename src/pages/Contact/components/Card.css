@@ -1,0 +1,49 @@
+.card-container{
+    width: 692px;
+    height: 113px;
+    background-color: #F6F0E9;
+    border-radius: 12px;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    padding-left: 14px;
+    padding-right: 14px;
+    gap: 24px;
+}
+
+.icon{
+    background-color: #FFFFFF;
+    border-radius: 50%;
+    width: 55px;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon img{
+    width: 24px;
+}
+
+.content-container{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+
+.content-title{
+    font-family: Montserrat, sans-serif;
+    font-size: 24px;
+    font-weight: 500;
+    color: #545456;
+    margin: 0;
+}
+
+.content-body{
+    font-family: Montserrat, sans-serif;
+    font-size: 24px;
+    font-weight: 500;
+    color: #000000;
+    margin: 0;
+}
